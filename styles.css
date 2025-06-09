@@ -1,0 +1,333 @@
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    color: transparent;
+    background-color: #0a0a0a;
+    -webkit-app-region: drag;
+    padding: 0%;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    position: relative;
+    padding: 2rem 1.5rem;
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+#clock {
+    color: #00e5ff;
+    font-size: 48px;
+    font-weight: 300;
+    text-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+    letter-spacing: 2px;
+}
+
+#day {
+    font-size: 14px;
+    color: #888;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.icon-play {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 10px solid #fff;
+    margin-left: 2px;
+}
+
+/* Ícone Pause (duas barras) */
+.icon-pause {
+    display: inline-block;
+    width: 10px;
+    height: 12px;
+    position: relative;
+}
+.icon-pause:before, .icon-pause:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 3px;
+    height: 12px;
+    background: #fff;
+    border-radius: 2px;
+}
+.icon-pause:before {
+    left: 0;
+}
+.icon-pause:after {
+    right: 0;
+}
+
+/* Ícone Stop (quadrado) */
+.icon-stop {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 3px;
+    margin-top: 2px;
+    margin-left: 2px;
+}
+.buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+    -webkit-app-region: no-drag;
+}
+
+.buttons button {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-radius: 12px;
+    padding: 10px 16px;
+    margin: 0 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    -webkit-app-region: no-drag;
+    position: relative;
+    z-index: 1000;
+    min-width: 40px;
+    min-height: 40px;
+}
+
+.buttons button.hidden {
+    display: none !important;
+}
+
+.buttons button.visible {
+    display: flex !important;
+}
+
+.buttons button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.user-section {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    -webkit-app-region: no-drag;
+    width: 100%;
+    gap: 8px;
+    padding: 0 10%;
+    box-sizing: border-box;
+}
+
+#matricula {
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-size: 12px;
+    outline: none;
+    transition: all 0.2s ease;
+    flex: 0 0 20%;
+    box-sizing: border-box;
+    min-width: 0;
+}
+
+#matricula:focus {
+    border: 1.5px solid #00e5ff;
+    box-shadow: 0 0 0 4px rgba(0, 229, 255, 0.1);
+}
+
+#tarefas-dropdown {
+    flex: 0 0 80%;
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-size: 12px;
+    outline: none;
+    transition: all 0.2s ease;
+    -webkit-app-region: no-drag;
+    box-sizing: border-box;
+    min-width: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#tarefas-dropdown option {
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 8px;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+#tarefas-dropdown:focus {
+    border: 1.5px solid #00e5ff;
+    box-shadow: 0 0 0 4px rgba(0, 229, 255, 0.1);
+}
+
+#tarefa-selecionada {
+    margin-top: 16px;
+    color: #00e5ff;
+    font-size: 16px;
+    min-height: 22px;
+    font-weight: 500;
+}
+
+#btn-minimizar {
+    -webkit-app-region: no-drag !important;
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.05);
+    color: #00e5ff;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#btn-minimizar:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.min-traco {
+    display: block;
+    width: 16px;
+    height: 2px;
+    border-radius: 2px;
+    background: none;
+    border-bottom: 2px solid #00e5ff;
+    margin-top: 2px;
+}
+
+.controle-tarefa {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    justify-content: center;
+    -webkit-app-region: no-drag;
+}
+
+.btn-controle {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+.btn-controle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.btn-controle.play {
+    background: #00e5ff;
+    color: #000;
+    -webkit-app-region: no-drag;
+}
+
+.btn-controle.play:hover {
+    background: #00c8ff;
+}
+
+.btn-controle.pause {
+    background: #ffd700;
+    color: #000;
+    -webkit-app-region: no-drag;
+}
+
+.btn-controle.pause:hover {
+    background: #ffc800;
+}
+
+.btn-controle.stop {
+    background: #ff4444;
+    color: #fff;
+    -webkit-app-region: no-drag;
+}
+
+.btn-controle.stop:hover {
+    background: #ff3333;
+}
+
+.btn-controle:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-controle.exportar {
+    background-color: rgba(0, 229, 255, 0.1);
+    color: #00e5ff;
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 16px;
+    transition: all 0.2s ease;
+    -webkit-app-region: no-drag;
+}
+
+.btn-controle.exportar:hover {
+    background-color: rgba(0, 229, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.tempo-contador {
+    font-size: 14px;
+    color: #00e5ff;
+    margin-top: 8px;
+    text-align: center;
+    font-family: 'Inter', monospace;
+}

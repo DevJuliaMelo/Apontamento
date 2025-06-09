@@ -1,0 +1,23 @@
+# Arquivos temporários do Excel
+~$Apontamento_Horas.xlsx
+
+# Planilhas geradas/exportadas
+Apontamento_Horas.xlsx
+Apontamento_Horas_*.xlsx
+
+# Dependências do Node.js
+node_modules/
+
+# Arquivos de log
+*.log
+
+# Configurações do VS Code
+.vscode/
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de build temporários
+dist/
+build/
