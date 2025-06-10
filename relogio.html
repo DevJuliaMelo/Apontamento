@@ -117,9 +117,9 @@
                 return;
             }
 
-            // Verifica se passaram mais de 5 minutos
+            // Verifica se passaram mais de 30 minutos
             const tempoDesdeUltimoApontamento = agora - ultimoApontamento;
-            const cincoMinutos = 5 * 60 * 1000; // 5 minutos em milissegundos
+            const trintaMinutos = 30 * 60 * 1000; // 30 minutos em milissegundos
 
             console.log('Verificando alerta:', {
                 tempoDesdeUltimoApontamento: Math.floor(tempoDesdeUltimoApontamento / 1000) + ' segundos',
@@ -128,7 +128,7 @@
                 cronometroParado: cronometroParado
             });
 
-            if (tempoDesdeUltimoApontamento > cincoMinutos) {
+            if (tempoDesdeUltimoApontamento > trintaMinutos) {
                 relogio.classList.add('alerta');
             } else {
                 relogio.classList.remove('alerta');
