@@ -16,8 +16,8 @@ function createWindow() {
     const primaryDisplay = screen.getPrimaryDisplay();
     const { width, height } = primaryDisplay.workAreaSize;
 
-    const relogioWidth = 100;
-    const relogioHeight = 100;
+    const relogioWidth = 150;
+    const relogioHeight = 150;
 
     // Cria a janela do relógio
     mainWindow = new BrowserWindow({
@@ -538,3 +538,10 @@ function agendarExportacaoAutomatica() {
         }, 24 * 60 * 60 * 1000); // 24 horas em milissegundos
     }, tempoAteMeiaNoite);
 }
+
+// Adiciona handler para encaminhar estado do cronômetro para o relógio
+ipcMain.on('cronometro-estado', (event, estado) => {
+    if (mainWindow && !mainWindow.isDestroyed()) {
+        mainWindow.webContents.send('cronometro-estado', estado);
+    }
+});

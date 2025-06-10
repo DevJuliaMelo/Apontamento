@@ -162,6 +162,7 @@ body {
     flex: 0 0 20%;
     box-sizing: border-box;
     min-width: 0;
+    -webkit-app-region: no-drag;
 }
 
 #matricula:focus {

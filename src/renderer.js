@@ -17,6 +17,33 @@ function mostrarBotao(id, mostrar) {
     }
 }
 
+// Função para enviar estado do cronômetro para o relógio
+function enviarEstadoCronometro() {
+    let ultimoApontamento = null;
+    
+    // Se acabou de finalizar um apontamento, usa o horário atual
+    if (ultimaAcao === 'stop') {
+        ultimoApontamento = new Date();
+    } 
+    // Se está em um apontamento, usa o horário de início
+    else if (tempoInicio) {
+        ultimoApontamento = tempoInicio;
+    }
+    
+    const estado = {
+        parado: !intervalo,
+        ultimoApontamento: ultimoApontamento
+    };
+    
+    console.log('Enviando estado do cronômetro:', {
+        parado: estado.parado,
+        ultimoApontamento: ultimoApontamento ? ultimoApontamento.toLocaleTimeString() : null,
+        ultimaAcao: ultimaAcao
+    });
+    
+    ipcRenderer.send('cronometro-estado', estado);
+}
+
 // Função para iniciar contagem
 function iniciarContagem() {
     const tarefaSelecionada = document.getElementById('tarefas-dropdown').value;
@@ -36,6 +63,9 @@ function iniciarContagem() {
 
     // Inicia o contador
     intervalo = setInterval(atualizarContador, 1000);
+    
+    // Envia estado atualizado
+    enviarEstadoCronometro();
 }
 
 // Função para pausar contagem
@@ -66,6 +96,9 @@ async function pausarContagem() {
         mostrarBotao('btn-play', true);
         mostrarBotao('btn-pause', false);
         mostrarBotao('btn-stop', true);
+        
+        // Envia estado atualizado
+        enviarEstadoCronometro();
     }
 }
 
@@ -78,7 +111,7 @@ async function finalizarContagem() {
     }
     
     const tempoFinal = new Date();
-    const tempoTotal = tempoPausa ? 
+    const tempoTotalCalculado = tempoPausa ? 
         (tempoPausa - tempoInicio) : 
         (tempoFinal - tempoInicio);
 
@@ -89,7 +122,7 @@ async function finalizarContagem() {
         inicio: tempoInicio,
         pausa: tempoPausa,
         fim: tempoFinal,
-        tempoTotal: tempoTotal
+        tempoTotal: tempoTotalCalculado
     };
 
     // Salva os dados
@@ -115,6 +148,9 @@ async function finalizarContagem() {
     tempoTotal = 0;
     tarefaAtual = null;
     ultimaAcao = 'stop';
+
+    // Envia estado atualizado com o último apontamento
+    enviarEstadoCronometro();
 }
 
 // Função para atualizar o contador
